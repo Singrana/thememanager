@@ -49,8 +49,6 @@ Change your application config
 			...
 			],
 			...
-
-	,
 ],
 ```
 
