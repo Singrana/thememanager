@@ -1,4 +1,4 @@
-thememanager
+Theme manager
 ============
 
 Theme manager for Yii2
@@ -49,6 +49,7 @@ Change your application config
 			...
 			],
 			...
+	],
 ],
 ```
 
