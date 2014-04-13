@@ -1,6 +1,6 @@
 {
-	"name": "singrana/SinThemeSwitcher",
-	"description": "Theme switcher",
+	"name": "singrana/thememanager",
+	"description": "Theme manager for Yii2",
 	"keywords": ["theme", "singrana", "yii2","yii"],
 	"type": "yii2-extension",
 	"authors":
@@ -14,7 +14,8 @@
 	{
 		"yiisoft/yii2": "*"
 	},
-	"autoload": {
-		"psr-4": { "singrana\\twig\\": "" }
+	"autoload":
+	{
+		"psr-4": { "singrana\\thememanager\\": "" }
 	}
 }
