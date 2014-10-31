@@ -89,6 +89,8 @@ class ThemeManager extends \yii\base\Theme
 
 		if(!empty($this->_currentTheme['defaultLayout']))
 			$this->defaultLayout=$this->_currentTheme['defaultLayout'];
+		else
+			$this->defaultLayout=null;
 
 	}
 
