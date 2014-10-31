@@ -32,7 +32,7 @@ Change your application config
 
 	'theme'	=>
 	[
-			'class'	=>	'singrana\thememanager\components\ThemeManager',
+			'class'     =>	'singrana\thememanager\components\ThemeManager',
 			'current'	=>	'site',
 
 			'themes'	=>
@@ -41,9 +41,10 @@ Change your application config
 				[
 					'pathMap'	=>
 					[
-						'@app/views'	=>	'@app/themes/site/views',
+						'@app/views'	        =>	'@app/themes/site/views',
 						'@app/views/layouts'	=>	'@app/themes/site/layouts',
 					],
+					'defaultLayout'				=>	'//inner',
 				],
 
 			...
