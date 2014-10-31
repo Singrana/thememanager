@@ -1,8 +1,18 @@
 {
 	"name": "singrana/thememanager",
-	"description": "Theme manager for Yii2",
-	"keywords": ["theme", "singrana", "yii2","yii"],
+	"description": "Theme manager for Yii2 (simple theme managment for Yii2)",
 	"type": "yii2-extension",
+
+	"version": "0.0.2",
+	"license": "MIT",
+
+	"keywords":
+	[
+		"themes",
+		"thememanager",
+		"yii2",
+		"sinplatform"
+	],
 	"authors":
 	[
 		{

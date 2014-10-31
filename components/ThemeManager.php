@@ -16,15 +16,23 @@ class ThemeManager extends \yii\base\Theme
 	 * @var property for current theme
 	 */
 	public $current;
+
 	/**
 	 * @var property for themes array
 	 */
 	public $themes;
 
 	/**
+	 * @var property for setup default layout
+	 */
+	public $defaultLayout;
+
+	/**
 	 * @var storage current theme
 	 */
 	private $_currentTheme;
+
+
 
 
 	/**
@@ -38,7 +46,7 @@ class ThemeManager extends \yii\base\Theme
 		if(empty($this->themes))
 			throw new InvalidConfigException('The "themes" property must be set.');
 
-
+		$this->defaultLayout=null;
 		$this->validateTheme($this->current);
 
 		$this->changeTheme($this->current);
@@ -78,6 +86,10 @@ class ThemeManager extends \yii\base\Theme
 
 		if(!empty($this->_currentTheme['baseUrl']))
 			$this->setBaseUrl($this->_currentTheme['baseUrl']);
+
+		if(!empty($this->_currentTheme['defaultLayout']))
+			$this->defaultLayout=$this->_currentTheme['defaultLayout'];
+
 	}
 
 	public function createTheme($theme, $themeArray)
