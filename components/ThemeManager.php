@@ -1,13 +1,14 @@
 <?php
 /**
  * @author: Singrana
- * @email: singrana@singrana.com
+ * @email : singrana@singrana.com
  * Date: 12.04.2014
  */
 
 namespace singrana\thememanager\components;
 
 use Yii;
+use yii\web\NotFoundHttpException;
 
 
 class ThemeManager extends \yii\base\Theme
@@ -33,37 +34,41 @@ class ThemeManager extends \yii\base\Theme
 	private $_currentTheme;
 
 
-
-
 	/**
 	 * @throws InvalidConfigException
 	 */
 	public function init()
 	{
-		if(empty($this->current))
-			throw new InvalidConfigException('The "current" property must be set.');
+		if (!empty($this->current))
+		{
 
-		if(empty($this->themes))
-			throw new InvalidConfigException('The "themes" property must be set.');
+			if (empty($this->themes))
+			{
+				throw new InvalidConfigException('The "themes" property must be set.');
+			}
 
-		$this->defaultLayout=null;
-		$this->validateTheme($this->current);
+			$this->defaultLayout = null;
+			$this->validateTheme($this->current);
 
-		$this->changeTheme($this->current);
+			$this->changeTheme($this->current);
+		}
 
 		parent::init();
 	}
 
 	/**
 	 * @param $theme - theme for validate
+	 *
 	 * @throws InvalidConfigException
 	 */
 	public function validateTheme($theme)
 	{
-		if(!isset($this->themes[$theme]) || empty($this->themes[$theme]))
+		if (!isset($this->themes[ $theme ]) || empty($this->themes[ $theme ]))
+		{
 			throw new InvalidConfigException('Select theme not found.');
+		}
 
-		if(!isset($this->themes[$theme]['pathMap']) || empty($this->themes[$theme]['pathMap']))
+		if (!isset($this->themes[ $theme ][ 'pathMap' ]) || empty($this->themes[ $theme ][ 'pathMap' ]))
 		{
 			throw new InvalidConfigException('The "pathMap" property in selected theme must be set.');
 		}
@@ -75,27 +80,35 @@ class ThemeManager extends \yii\base\Theme
 	public function changeTheme($theme)
 	{
 		$this->validateTheme($theme);
-		$this->current=$theme;
+		$this->current = $theme;
 
-		$this->_currentTheme=$this->themes[$this->current];
+		$this->_currentTheme = $this->themes[ $this->current ];
 
-		$this->pathMap=$this->_currentTheme['pathMap'];
+		$this->pathMap = $this->_currentTheme[ 'pathMap' ];
 
-		if(!empty($this->_currentTheme['basePath']))
-			$this->setBasePath($this->_currentTheme['basePath']);
+		if (!empty($this->_currentTheme[ 'basePath' ]))
+		{
+			$this->setBasePath($this->_currentTheme[ 'basePath' ]);
+		}
 
-		if(!empty($this->_currentTheme['baseUrl']))
-			$this->setBaseUrl($this->_currentTheme['baseUrl']);
+		if (!empty($this->_currentTheme[ 'baseUrl' ]))
+		{
+			$this->setBaseUrl($this->_currentTheme[ 'baseUrl' ]);
+		}
 
-		if(!empty($this->_currentTheme['defaultLayout']))
-			$this->defaultLayout=$this->_currentTheme['defaultLayout'];
+		if (!empty($this->_currentTheme[ 'defaultLayout' ]))
+		{
+			$this->defaultLayout = $this->_currentTheme[ 'defaultLayout' ];
+		}
 		else
-			$this->defaultLayout=null;
+		{
+			$this->defaultLayout = null;
+		}
 
 	}
 
 	public function createTheme($theme, $themeArray)
 	{
-		$this->themes[$theme]=$themeArray;
+		$this->themes[ $theme ] = $themeArray;
 	}
 }
