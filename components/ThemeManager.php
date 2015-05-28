@@ -41,7 +41,6 @@ class ThemeManager extends \yii\base\Theme
 	{
 		if (!empty($this->current))
 		{
-
 			if (empty($this->themes))
 			{
 				throw new InvalidConfigException('The "themes" property must be set.');
@@ -49,8 +48,11 @@ class ThemeManager extends \yii\base\Theme
 
 			$this->defaultLayout = null;
 			$this->validateTheme($this->current);
-
 			$this->changeTheme($this->current);
+		}
+		else
+		{
+			$this->setBasePath('@app');
 		}
 
 		parent::init();
@@ -63,15 +65,18 @@ class ThemeManager extends \yii\base\Theme
 	 */
 	public function validateTheme($theme)
 	{
-		if (!isset($this->themes[ $theme ]) || empty($this->themes[ $theme ]))
+
+		if (!isset($this->themes[$theme]) || empty($this->themes[$theme]))
 		{
 			throw new InvalidConfigException('Select theme not found.');
 		}
 
+		/*
 		if (!isset($this->themes[ $theme ][ 'pathMap' ]) || empty($this->themes[ $theme ][ 'pathMap' ]))
 		{
 			throw new InvalidConfigException('The "pathMap" property in selected theme must be set.');
 		}
+		*/
 	}
 
 	/**
@@ -82,23 +87,26 @@ class ThemeManager extends \yii\base\Theme
 		$this->validateTheme($theme);
 		$this->current = $theme;
 
-		$this->_currentTheme = $this->themes[ $this->current ];
+		$this->_currentTheme = $this->themes[$this->current];
 
-		$this->pathMap = $this->_currentTheme[ 'pathMap' ];
-
-		if (!empty($this->_currentTheme[ 'basePath' ]))
+		if (!empty($this->_currentTheme['pathMap']))
 		{
-			$this->setBasePath($this->_currentTheme[ 'basePath' ]);
+			$this->pathMap = $this->_currentTheme['pathMap'];
 		}
 
-		if (!empty($this->_currentTheme[ 'baseUrl' ]))
+		if (!empty($this->_currentTheme['basePath']))
 		{
-			$this->setBaseUrl($this->_currentTheme[ 'baseUrl' ]);
+			$this->setBasePath($this->_currentTheme['basePath']);
 		}
 
-		if (!empty($this->_currentTheme[ 'defaultLayout' ]))
+		if (!empty($this->_currentTheme['baseUrl']))
 		{
-			$this->defaultLayout = $this->_currentTheme[ 'defaultLayout' ];
+			$this->setBaseUrl($this->_currentTheme['baseUrl']);
+		}
+
+		if (!empty($this->_currentTheme['defaultLayout']))
+		{
+			$this->defaultLayout = $this->_currentTheme['defaultLayout'];
 		}
 		else
 		{
@@ -109,6 +117,6 @@ class ThemeManager extends \yii\base\Theme
 
 	public function createTheme($theme, $themeArray)
 	{
-		$this->themes[ $theme ] = $themeArray;
+		$this->themes[$theme] = $themeArray;
 	}
 }
