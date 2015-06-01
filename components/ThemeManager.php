@@ -113,6 +113,8 @@ class ThemeManager extends \yii\base\Theme
 			$this->defaultLayout = null;
 		}
 
+		\Yii::setAlias('@theme', '@app/themes/'.$this->current);
+
 	}
 
 	public function createTheme($theme, $themeArray)
