@@ -9,6 +9,7 @@ namespace singrana\thememanager\components;
 
 use Yii;
 use yii\web\NotFoundHttpException;
+use yii\base\InvalidConfigException;
 
 
 class ThemeManager extends \yii\base\Theme
